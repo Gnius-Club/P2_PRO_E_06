@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook - Sesión 6: ¡Pruebas de Fuego! – Testeo del Núcleo Integrado</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        .header { background-color: #ffa500; color: white; text-align: center; padding: 10px; } /* Orange Accent */
+        .activity { margin-bottom: 20px; }
+        .banner {
+            background-color: #ffa500; /* Orange Accent */
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-weight: bold;
+            list-style: none;
+            display: block;
+        }
+        .content { display: none; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+        }
+        span[style*="color: red;"] {
+            font-weight: bold;
+        }
+         ul, ol {
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .time-title { margin-bottom: 20px; text-align: center; font-size: 1.2em; color: #555;}
+
+        summary {
+           display: block;
+           list-style: none;
+        }
+        summary::-webkit-details-marker {
+           display: none;
+        }
+
+    </style>
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            if (content) {
+                if (content.style.display === "none" || content.style.display === "") {
+                    content.style.display = "block";
+                } else {
+                    content.style.display = "none";
+                }
+            }
+        }
+
+        window.onload = () => {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
+        };
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>Playbook - Sesión 6: ¡Pruebas de Fuego! – Testeo del Núcleo Integrado</h1>
+    </div>
+    <div class="container">
+        <h2 class="time-title">Tiempo efectivo de clase: 40 minutos</h2>
+
+        <!-- Resumen de Sesión -->
+        <div id="activity-0" class="activity">
+            <div class="banner" onclick="toggleContent('activity_0_content')">
+                <div class="title">📝 Resumen de Sesión</div>
+            </div>
+            <div id="activity_0_content" class="content">
+                <table>
+                    <tr>
+                        <td style="width: 50%; padding: 10px; border-right: 1px solid #ddd;">
+                            <strong>🎯 Objetivo de la Sesión:</strong>
+                            <ul>
+                                <li>Validar exhaustivamente que el núcleo integrado funcione correctamente según el diseño.</li>
+                                <li>Realizar pruebas completas del flujo de interacción principal.</li>
+                                <li>Corregir bugs de integración encontrados durante las pruebas.</li>
+                                <li>Confirmar la estabilidad del núcleo antes de añadir features adicionales.</li>
+                            </ul>
+                            <strong>⏱️ Duración Estimada:</strong> 40 minutos.
+                        </td>
+                        <td style="width: 50%; padding: 10px;">
+                            <strong>🔑 Entregable Clave:</strong>
+                            <ul>
+                                <li>Núcleo integrado estable y probado funcionalmente.</li>
+                                <li>Documentación/registro de bugs de integración corregidos.</li>
+                                <li>Tablero Kanban actualizado, con tareas del núcleo idealmente en "¡Listo!".</li>
+                                <li>Decisión sobre si el núcleo está listo para la siguiente fase (features).</li>
+                            </ul>
+                             <strong>🛠️ Materiales/Preparación:</strong>
+                            <ul>
+                                <li>Dispositivos con acceso a Scratch y los proyectos con el núcleo integrado.</li>
+                                <li>Tablero Kanban de cada equipo actualizado.</li>
+                                <li>Acceso al T-Bar y al diseño técnico/flujo.</li>
+                                <li>Proyector o pantalla.</li>
+                                <li>Método para documentar bugs de integración.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Desarrollo de la Sesión -->
+
+        <!-- Actividad 1: Stand-up de Pruebas Integradas -->
+        <div id="activity-1" class="activity">
+             <div class="banner" onclick="toggleContent('activity_1_content')">
+                <div class="title">🔥 Actividad 1: Stand-up de Pruebas Integradas ⏰ Tiempo: 5 minutos</div>
+             </div>
+            <div id="activity_1_content" class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Acción</th>
+                            <th style="width: 50%;">Diálogo del Maestro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Paso 1 (1 min):</strong> Reunir equipos. Presentar el objetivo: Pruebas de Fuego del núcleo completo.
+                                (<strong>Proyectar Diapositiva 1</strong>: Título "Sesión 6: ¡Pruebas de Fuego!" y Objetivo: "¡Validar nuestro núcleo integrado!").
+                            </td>
+                            <td>
+                                "¡Equipos Pro! Hoy sometemos nuestro núcleo integrado a las ¡Pruebas de Fuego! 🔥 Después de conectar las piezas, vamos a probar TODO el flujo completo para asegurarnos de que es sólido como una roca."
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Paso 2 (4 min):</strong> Guiar stand-up: ¿Qué secuencia completa probaremos hoy?
+                                (<strong>Proyectar Diapositiva 2</strong>: Visual del flujo completo del núcleo (diagrama de Sesión 1/Act 3). Pregunta: "¿Qué secuencia completa probaremos hoy?").
+                            </td>
+                            <td>
+                                "Recordemos el flujo general que diseñamos para nuestro núcleo."
+                                <br><br>
+                                "Testers (con ayuda del equipo), ¿cuál es la secuencia COMPLETA, de principio a fin, que van a probar exhaustivamente hoy para validar que todo el núcleo integrado funciona?"
+                                <br><br>
+                                <em>(Facilitar que cada equipo defina el escenario de prueba principal que cubrirá todo el flujo del núcleo).</em>
+                                <br><br>
+                                "¡Perfecto! Ese es el recorrido que vamos a examinar a fondo. ¡A las pruebas!"
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Actividad 2: ¡Prueba Total! Pruebas de Interacción -->
+        <div id="activity-2" class="activity">
+             <div class="banner" onclick="toggleContent('activity_2_content')">
+                 <div class="title">🧪 Actividad 2: ¡Prueba Total! Pruebas de Interacción ⏰ Tiempo: 30 minutos</div>
+             </div>
+            <div id="activity_2_content" class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Acción</th>
+                            <th style="width: 50%;">Diálogo del Maestro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Paso 1 (30 min - Bloque Principal):</strong> Facilitar pruebas exhaustivas del flujo completo del núcleo (Tester lidera). Programador corrige bugs de integración. Arquitecto observa flujo general y ayuda a diagnosticar. Circular y apoyar.
+                                (<strong>Proyectar Diapositiva 3</strong>: Título "¡Prueba Total del Núcleo!". Iconos: Lupa gigante sobre el flujo 🔍🌊, Tester liderando 🎮✨, Programador arreglando conexiones 💻🔌, Arquitecto observando 🧐).
+                            </td>
+                            <td>
+                                "¡Adelante con las Pruebas de Fuego! Tienen 30 minutos para validar ese núcleo integrado."
+                                <br><br>
+                                "<strong>Testers Creativos/as:</strong> ¡Es su momento! Ejecuten la secuencia completa que definieron. Prueben diferentes caminos si los hay. ¿Todo fluye como se espera? ¿Las conexiones funcionan? ¡Busquen bugs de INTEGRACIÓN, donde las piezas no colaboran bien!"
+                                <br><br>
+                                "<strong>Programadores/as Scratch:</strong> ¡Listos para corregir! Si el Tester encuentra un bug de integración (algo que funcionaba por separado pero falla al conectarse), ¡su misión es arreglar esa conexión en el código!"
+                                <br><br>
+                                "<strong>Arquitectos/as Digitales:</strong> ¡Observen el flujo general! ¿La experiencia es coherente? ¿Se cumple la visión del diseño? Ayuden a identificar por qué fallan las integraciones si es necesario."
+                                <br><br>
+                                "¡El objetivo es un núcleo integrado que funcione sin problemas de principio a fin!"
+                                <br><br>
+                                <em>(Circular activamente. Ayudar a los Testers a probar escenarios completos. Apoyar a los Programadores a depurar problemas de mensajes, tiempos o variables compartidas. Facilitar la comunicación para resolver bugs de integración).</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Paso 2 (Integrado en los 30 min):</strong> Gestionar movimiento de tareas de integración en Kanban.
+                                (<strong>Proyectar Diapositiva 4</strong>: Recordatorio visual Flujo Kanban en Pruebas de Integración: Ídem Sesión 3, pero enfatizando que son bugs de *integración*).
+                            </td>
+                            <td>
+                                <em>(Reforzar el flujo Kanban para este contexto):</em>
+                                <br>
+                                "¡Mantengan el Kanban actualizado durante estas pruebas finales del núcleo!"
+                                <br><br>
+                                "Si la secuencia completa del núcleo pasa las pruebas del Tester ¡sin errores de integración!, ¡genial! Asegúrense de que todas las tareas del núcleo estén en '¡Listo! (✅)'."
+                                <br><br>
+                                "Si encuentran un bug de integración, la tarea o tareas relacionadas con esa conexión fallida deben volver a 'Haciendo (⚙️)' con una nota clara sobre el problema de integración."
+                                <br><br>
+                                "¡Queremos que al final, el núcleo completo esté validado y en '¡Listo!'!"
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Actividad 3: Cierre de Estabilidad -->
+        <div id="activity-3" class="activity">
+            <div class="banner" onclick="toggleContent('activity_3_content')">
+                <div class="title">✅ Actividad 3: Cierre de Estabilidad ⏰ Tiempo: 5 minutos</div>
+            </div>
+            <div id="activity_3_content" class="content">
+                 <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Acción</th>
+                            <th style="width: 50%;">Diálogo del Maestro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Paso 1 (3 min):</strong> Revisar Kanban. Preguntar: ¿El núcleo es estable? ¿Listo para añadir features?
+                                (<strong>Proyectar Diapositiva 5</strong>: Título "¿Núcleo Estable? 🤔✅". Imagen del Kanban con tareas del núcleo en '¡Listo!'. Pregunta: "¿Listo para añadir features?").
+                            </td>
+                            <td>
+                                "¡Tiempo final, Equipos Pro! Revisemos la estabilidad de ese núcleo."
+                                <br><br>
+                                "Miren su Kanban y piensen en las pruebas. ¿Consideran que el núcleo integrado es estable ahora? ¿Funciona de forma fiable la secuencia principal?"
+                                <br><br>
+                                "La gran pregunta: ¿Está este núcleo listo y sólido como base para empezar a añadir las features adicionales que diseñamos?"
+                                <br><br>
+                                <em>(Facilitar una rápida autoevaluación por equipo sobre la estabilidad del núcleo).</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Paso 2 (2 min):</strong> Cerrar sesión. Recordar guardar. Anticipar Sesión 7 (Planificación Feature 1).
+                            </td>
+                            <td>
+                                "¡Excelente trabajo en estas intensas Pruebas de Fuego!"
+                                <br><br>
+                                "¡Guarden muy bien esta versión estable del núcleo!"
+                                <br><br>
+                                "Con un núcleo sólido y probado, estamos listos para la siguiente aventura: ¡Expandir la Misión! En la próxima sesión, empezaremos a planificar cómo añadir la primera característica adicional (feature) a nuestro proyecto."
+                                <br><br>
+                                "¡Nos vemos en la Sesión 7!"
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div> <!-- Fin del container -->
+</body>
+</html>
