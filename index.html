@@ -14,12 +14,21 @@
             color: white;
             padding: 10px;
             cursor: pointer;
-            margin-bottom: 10px;
+            margin-bottom: 10px; /* Adjusted for spacing */
             font-weight: bold;
             list-style: none;
             display: block;
+            border-radius: 5px; /* Rounded corners for banner */
         }
-        .content { display: none; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; }
+        .content { 
+            display: none; 
+            padding: 15px; 
+            border: 1px solid #ddd; 
+            margin-bottom: 10px; 
+            border-radius: 5px; /* Rounded corners for content */
+            margin-top: -10px; /* Visual connection with banner */
+            padding-top: 20px; /* Avoid text clash */
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -43,13 +52,16 @@
         }
         .time-title { margin-bottom: 20px; text-align: center; font-size: 1.2em; color: #555;}
 
-        summary {
-           display: block;
-           list-style: none;
+        /* Making facilitator instructions clearer */
+        td em, td i { /* Style for italicized facilitator notes */
+            color: #555;
+            font-style: italic;
+            display: block; /* Put notes on new lines */
+            margin-top: 5px;
         }
-        summary::-webkit-details-marker {
-           display: none;
-        }
+        /* Ensure step <strong> tags render bold */
+        td strong { font-weight: bold; } /* General strong for keywords */
+        td > strong { display: block; margin-bottom: 5px; } /* For step headers */
 
     </style>
     <script>
@@ -69,6 +81,11 @@
             contents.forEach(content => {
                 content.style.display = 'none';
             });
+            // Open "Resumen de Sesión" by default
+            const resumenContent = document.getElementById('activity_0_content');
+            if (resumenContent) {
+                resumenContent.style.display = 'block';
+            }
         };
     </script>
 </head>
@@ -84,7 +101,7 @@
             <div class="banner" onclick="toggleContent('activity_0_content')">
                 <div class="title">📝 Resumen de Sesión</div>
             </div>
-            <div id="activity_0_content" class="content">
+            <div id="activity_0_content" class="content" style="display: block;">
                 <table>
                     <tr>
                         <td style="width: 50%; padding: 10px; border-right: 1px solid #ddd;">
@@ -137,8 +154,12 @@
                     <tbody>
                         <tr>
                             <td>
-                                <strong>Paso 1 (1 min):</strong> Reunir equipos. Presentar el objetivo: Pruebas de Fuego del núcleo completo.
-                                (<strong>Proyectar Diapositiva 1</strong>: Título "Sesión 6: ¡Pruebas de Fuego!" y Objetivo: "¡Validar nuestro núcleo integrado!").
+                                <strong>Paso 1 (1 min):</strong>
+                                <ul>
+                                    <li>Reunir equipos.</li>
+                                    <li>Presentar el objetivo: Pruebas de Fuego del núcleo completo.</li>
+                                    <li><strong>Proyectar Diapositiva 1</strong>.</li>
+                                </ul>
                             </td>
                             <td>
                                 "¡Equipos Pro! Hoy sometemos nuestro núcleo integrado a las ¡Pruebas de Fuego! 🔥 Después de conectar las piezas, vamos a probar TODO el flujo completo para asegurarnos de que es sólido como una roca."
@@ -146,8 +167,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Paso 2 (4 min):</strong> Guiar stand-up: ¿Qué secuencia completa probaremos hoy?
-                                (<strong>Proyectar Diapositiva 2</strong>: Visual del flujo completo del núcleo (diagrama de Sesión 1/Act 3). Pregunta: "¿Qué secuencia completa probaremos hoy?").
+                                <strong>Paso 2 (4 min):</strong>
+                                <ul>
+                                    <li>Guiar stand-up: ¿Qué secuencia completa probaremos hoy?</li>
+                                    <li><strong>Proyectar Diapositiva 2</strong>.</li>
+                                </ul>
                             </td>
                             <td>
                                 "Recordemos el flujo general que diseñamos para nuestro núcleo."
@@ -180,8 +204,14 @@
                     <tbody>
                         <tr>
                             <td>
-                                <strong>Paso 1 (30 min - Bloque Principal):</strong> Facilitar pruebas exhaustivas del flujo completo del núcleo (Tester lidera). Programador corrige bugs de integración. Arquitecto observa flujo general y ayuda a diagnosticar. Circular y apoyar.
-                                (<strong>Proyectar Diapositiva 3</strong>: Título "¡Prueba Total del Núcleo!". Iconos: Lupa gigante sobre el flujo 🔍🌊, Tester liderando 🎮✨, Programador arreglando conexiones 💻🔌, Arquitecto observando 🧐).
+                                <strong>Paso 1 (30 min - Bloque Principal):</strong>
+                                <ul>
+                                    <li>Facilitar pruebas exhaustivas del flujo completo del núcleo (Tester lidera).</li>
+                                    <li>Programador corrige bugs de integración.</li>
+                                    <li>Arquitecto observa flujo general y ayuda a diagnosticar.</li>
+                                    <li>Circular y apoyar.</li>
+                                    <li><strong>Proyectar Diapositiva 3</strong>.</li>
+                                </ul>
                             </td>
                             <td>
                                 "¡Adelante con las Pruebas de Fuego! Tienen 30 minutos para validar ese núcleo integrado."
@@ -199,8 +229,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Paso 2 (Integrado en los 30 min):</strong> Gestionar movimiento de tareas de integración en Kanban.
-                                (<strong>Proyectar Diapositiva 4</strong>: Recordatorio visual Flujo Kanban en Pruebas de Integración: Ídem Sesión 3, pero enfatizando que son bugs de *integración*).
+                                <strong>Paso 2 (Integrado en los 30 min):</strong>
+                                <ul>
+                                    <li>Gestionar movimiento de tareas de integración en Kanban.</li>
+                                    <li><strong>Proyectar Diapositiva 4</strong>.</li>
+                                </ul>
                             </td>
                             <td>
                                 <em>(Reforzar el flujo Kanban para este contexto):</em>
@@ -235,8 +268,12 @@
                     <tbody>
                         <tr>
                             <td>
-                                <strong>Paso 1 (3 min):</strong> Revisar Kanban. Preguntar: ¿El núcleo es estable? ¿Listo para añadir features?
-                                (<strong>Proyectar Diapositiva 5</strong>: Título "¿Núcleo Estable? 🤔✅". Imagen del Kanban con tareas del núcleo en '¡Listo!'. Pregunta: "¿Listo para añadir features?").
+                                <strong>Paso 1 (3 min):</strong>
+                                <ul>
+                                    <li>Revisar Kanban.</li>
+                                    <li>Preguntar: ¿El núcleo es estable? ¿Listo para añadir features?</li>
+                                    <li><strong>Proyectar Diapositiva 5</strong>.</li>
+                                </ul>
                             </td>
                             <td>
                                 "¡Tiempo final, Equipos Pro! Revisemos la estabilidad de ese núcleo."
@@ -250,7 +287,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Paso 2 (2 min):</strong> Cerrar sesión. Recordar guardar. Anticipar Sesión 7 (Planificación Feature 1).
+                                <strong>Paso 2 (2 min):</strong>
+                                <ul>
+                                    <li>Cerrar sesión.</li>
+                                    <li>Recordar guardar.</li>
+                                    <li>Anticipar Sesión 7 (Planificación Feature 1).</li>
+                                </ul>
                             </td>
                             <td>
                                 "¡Excelente trabajo en estas intensas Pruebas de Fuego!"
